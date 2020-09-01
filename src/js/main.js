@@ -23,7 +23,7 @@ if (randomid) {
 }
 
 if (!whiteboardId) {
-    whiteboardId = "myNewWhiteboard";
+    whiteboardId = "myNewWhiteboard"+Math.floor(Math.random() * 1000) + 1;
 }
 
 whiteboardId = unescape(encodeURIComponent(whiteboardId)).replace(/[^a-zA-Z0-9\-]/g, "");
