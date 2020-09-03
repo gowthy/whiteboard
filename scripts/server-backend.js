@@ -21,7 +21,7 @@ function startBackendServer(port) {
     var app = express();
     app.use(express.static(path.join(__dirname, "..", "dist")));
     app.use("/uploads", express.static(path.join(__dirname, "..", "public", "uploads")));
-    var server = require("http").Server(app);
+    var server = require("https").Server(app);
     server.listen(port);
     var io = require("socket.io")(server, { path: "/ws-api" });
     WhiteboardInfoBackendService.start(io);
