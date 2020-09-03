@@ -50,11 +50,11 @@ function main() {
 
     signaling_socket.on("connect", function () {
         console.log("Websocket connected!");
-        initWhiteboard();
+        //initWhiteboard();
         signaling_socket.on("whiteboardConfig", (serverResponse) => {
             ConfigService.initFromServer(serverResponse);
             // Inti whiteboard only when we have the config from the server
-          //  initWhiteboard();
+            initWhiteboard();
         });
 
         /* signaling_socket.on("whiteboardInfoUpdate", (info) => {
@@ -143,8 +143,8 @@ function showBasicAlert(html, newOptions) {
 function initWhiteboard() {
     $(document).ready(function () {
         // by default set in readOnly mode
-        ReadOnlyService.activateReadOnlyMode();
-
+       // ReadOnlyService.activateReadOnlyMode();
+        ReadOnlyService.deactivateReadOnlyMode();
         if (urlParams.get("webdav") === "true") {
             $("#uploadWebDavBtn").show();
         }
