@@ -50,11 +50,11 @@ function main() {
 
     signaling_socket.on("connect", function () {
         console.log("Websocket connected!");
-
+        initWhiteboard();
         signaling_socket.on("whiteboardConfig", (serverResponse) => {
             ConfigService.initFromServer(serverResponse);
             // Inti whiteboard only when we have the config from the server
-            initWhiteboard();
+          //  initWhiteboard();
         });
 
         /* signaling_socket.on("whiteboardInfoUpdate", (info) => {
