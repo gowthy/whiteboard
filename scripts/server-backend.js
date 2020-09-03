@@ -21,9 +21,22 @@ function startBackendServer(port) {
     var app = express();
     app.use(express.static(path.join(__dirname, "..", "dist")));
     app.use("/uploads", express.static(path.join(__dirname, "..", "public", "uploads")));
-    var server = require("https").Server(app);
+    var server = require("https").createServer({
+        key: fs.readFileSync('./scripts/aimxcelsslpvt.key'),
+        cert: fs.readFileSync('./scripts/aimxcelstar.pem'),
+        ca: fs.readFileSync('./scripts/aimxcelcabundle.pem'),
+        requestCert: false,
+        rejectUnauthorized: false
+    },app);//.Server(app);
+   /*  https.createServer({
+        key: fs.readFileSync('./test_key.key'),
+        cert: fs.readFileSync('./test_cert.crt'),
+        ca: fs.readFileSync('./test_ca.crt'),
+        requestCert: false,
+        rejectUnauthorized: false
+    },app); */
     server.listen(port);
-    var io = require("socket.io")(server, { path: "/ws-api" });
+    var io = require("socket.io")(server,{secure:true});
     WhiteboardInfoBackendService.start(io);
 
     console.log("Webserver & socketserver running on port:" + port);
