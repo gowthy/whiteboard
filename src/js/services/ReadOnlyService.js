@@ -24,7 +24,7 @@ class ReadOnlyService {
      * Activate read-only mode
      */
     activateReadOnlyMode() {
-        this.#readOnlyActive = true;
+       /*  this.#readOnlyActive = true;
 
         this.#previousToolHtmlElem = $(".whiteboard-tool.active");
 
@@ -35,14 +35,25 @@ class ReadOnlyService {
         $(".whiteboard-edit-group > button").prop("disabled", true);
         $(".whiteboard-edit-group").addClass("group-disabled");
         $("#whiteboardUnlockBtn").hide();
-        $("#whiteboardLockBtn").show();
+        $("#whiteboardLockBtn").show(); */
+        this.#readOnlyActive = false;
+
+        $(".whiteboard-tool").prop("disabled", false);
+        $(".whiteboard-edit-group > button").prop("disabled", false);
+        $(".whiteboard-edit-group").removeClass("group-disabled");
+        $("#whiteboardUnlockBtn").show();
+        $("#whiteboardLockBtn").hide();
+
+        // restore previously selected tool
+        const { previousToolHtmlElem } = this;
+        if (previousToolHtmlElem) previousToolHtmlElem.click();
     }
 
     /**
      * Deactivate read-only mode
      */
     deactivateReadOnlyMode() {
-        if (ConfigService.isReadOnly) return;
+      //  if (ConfigService.isReadOnly) return;
 
         this.#readOnlyActive = false;
 
